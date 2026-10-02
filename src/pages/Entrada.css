@@ -1,0 +1,18 @@
+﻿.entrada-page {
+  width: min(100%, 720px);
+  margin: auto;
+  padding: 64px 24px;
+  box-sizing: border-box;
+  display: grid;
+  gap: 24px;
+  line-height: 1.6;
+}
+.entrada-brand { color: var(--accent); font-size: 24px; font-weight: 700; }
+.entrada-page h1 { margin: 0; font-size: clamp(32px, 5vw, 48px); line-height: 1.15; letter-spacing: -1px; }
+.entrada-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.entrada-actions a { padding: 12px 28px; border: 1px solid var(--text-h); border-radius: 8px; text-decoration: none; font-weight: 600; }
+.entrada-primary { background: var(--text-h); color: var(--bg); }
+.entrada-secondary { color: var(--text-h); }
+.entrada-actions a:hover { box-shadow: var(--shadow); }
+.entrada-actions a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.entrada-note { font-size: 0.9rem; }

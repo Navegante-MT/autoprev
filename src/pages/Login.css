@@ -1,0 +1,68 @@
+.login-page {
+  width: min(100%, 440px);
+  margin: 48px auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+  display: grid;
+  gap: 20px;
+}
+
+.login-page h1 {
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.login-form {
+  display: grid;
+  gap: 12px;
+  text-align: left;
+}
+
+.login-form label {
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+.login-form input,
+.login-form button {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.login-form input {
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.login-form button {
+  margin-top: 8px;
+  background: var(--text-h);
+  color: var(--bg);
+  cursor: pointer;
+}
+
+.login-form :disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.login-page a {
+  color: var(--accent);
+}
+
+.login-page :focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.login-error {
+  color: var(--text-h);
+  border-left: 4px solid #dc2626;
+  padding: 12px;
+  background: var(--code-bg);
+}

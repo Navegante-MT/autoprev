@@ -1,0 +1,9 @@
+﻿.recuperacao-status {
+  color: var(--text-h);
+  background: var(--code-bg);
+  border-left: 4px solid var(--accent);
+  padding: 12px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.recuperacao-help { font-size: 0.85rem; }
