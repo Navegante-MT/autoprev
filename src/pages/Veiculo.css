@@ -2,3 +2,4 @@
 .veiculo-page h1 { margin: 0; font-size: 32px; line-height: 1.2; }
 .veiculo-page a:not(.painel-action) { color: var(--accent); }
 .veiculo-leituras { display: grid; gap: 12px; padding-left: 24px; }
+.veiculo-exclusao { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); }

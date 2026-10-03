@@ -103,3 +103,10 @@ export async function registrarQuilometragem(id, quilometragem, dataRegistro) {
   })
   if (error) throw new Error(mensagemErroVeiculos(error))
 }
+
+export async function excluirVeiculo(id) {
+  const { data, error } = await supabase.from('veiculos').delete().eq('id', id).select('id').maybeSingle()
+  if (error) throw new Error(mensagemErroVeiculos(error))
+  if (!data) throw new Error('Veículo não encontrado ou indisponível para sua conta. Recarregue o painel.')
+  return data.id
+}

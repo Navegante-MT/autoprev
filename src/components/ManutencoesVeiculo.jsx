@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { listarManutencoes } from '../lib/manutencoes.js'
 import { formatarData } from '../lib/veiculos.js'
@@ -38,6 +39,7 @@ function ManutencoesVeiculo({ id }) {
                 <p>{formatarData(item.data_manutencao)} · {item.quilometragem.toLocaleString('pt-BR')} km</p>
                 {item.valor_pago !== null && <p>Valor: {Number(item.valor_pago).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>}
                 {item.oficina && <p>Oficina: {item.oficina}</p>}
+                <Link className="painel-action" to={`/manutencoes/${item.id}/editar`}>Editar ou excluir</Link>
                 {item.observacoes && <p className="manutencao-observacoes">{item.observacoes}</p>}
               </li>
             ))}

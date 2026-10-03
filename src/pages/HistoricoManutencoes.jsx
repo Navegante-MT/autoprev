@@ -115,7 +115,8 @@ function HistoricoManutencoes() {
                   <p>{formatarData(item.data_manutencao)} · {item.quilometragem.toLocaleString('pt-BR')} km</p>
                   {item.valor_pago !== null && <p>{Number(item.valor_pago).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>}
                   {item.oficina && <p>Oficina: {item.oficina}</p>}
-                  {item.observacoes && <p className="manutencao-observacoes">{item.observacoes}</p>}
+                  <Link className="painel-action" to={`/manutencoes/${item.id}/editar`}>Editar ou excluir</Link>
+                {item.observacoes && <p className="manutencao-observacoes">{item.observacoes}</p>}
                   <Link to={`/veiculos/${item.veiculo_id}`}>Ver veículo</Link>
                 </li>
               ))}

@@ -7,6 +7,7 @@ import CadastrarVeiculo from './pages/CadastrarVeiculo.jsx'
 import DetalhesVeiculo from './pages/DetalhesVeiculo.jsx'
 import AtualizarQuilometragem from './pages/AtualizarQuilometragem.jsx'
 import RegistrarManutencao from './pages/RegistrarManutencao.jsx'
+import EditarManutencao from './pages/EditarManutencao.jsx'
 import HistoricoManutencoes from './pages/HistoricoManutencoes.jsx'
 import RotaProtegida from './components/RotaProtegida.jsx'
 import RecuperarSenha from './pages/RecuperarSenha.jsx'
@@ -26,6 +27,7 @@ function App() {
           <Route path="/veiculos/:id/quilometragem" element={<AtualizarQuilometragem />} />
           <Route path="/veiculos/:id/manutencoes/nova" element={<RegistrarManutencao />} />
           <Route path="/manutencoes/nova" element={<RegistrarManutencao />} />
+          <Route path="/manutencoes/:id/editar" element={<EditarManutencao />} />
           <Route path="/historico" element={<HistoricoManutencoes />} />
         </Route>
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />

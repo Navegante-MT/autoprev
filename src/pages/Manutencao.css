@@ -5,3 +5,5 @@
 }
 .manutencao-form textarea { resize: vertical; }
 .manutencao-observacoes { white-space: pre-wrap; }
+.manutencao-edicao { border: 0; padding: 0; margin: 0; min-width: 0; }
+.manutencao-exclusao { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); }

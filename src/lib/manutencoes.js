@@ -35,10 +35,12 @@ export async function listarManutencoes(veiculoId, signal) {
   return data ?? []
 }
 
-export async function existeManutencaoSemelhante(campos) {
-  const { data, error } = await supabase.from('manutencoes').select('id')
+export async function existeManutencaoSemelhante(campos, ignorarId) {
+  let consulta = supabase.from('manutencoes').select('id')
     .eq('veiculo_id', campos.veiculoId).eq('tipo_manutencao_id', campos.tipoId)
-    .eq('data_manutencao', campos.data).eq('quilometragem', Number(campos.quilometragem)).limit(1).maybeSingle()
+    .eq('data_manutencao', campos.data).eq('quilometragem', Number(campos.quilometragem)).limit(1)
+  if (ignorarId) consulta = consulta.neq('id', ignorarId)
+  const { data, error } = await consulta.maybeSingle()
   if (error) throw new Error(mensagemErro(error))
   return Boolean(data)
 }
@@ -87,4 +89,35 @@ export async function consultarHistorico(filtros, pagina, signal) {
     .order('id', { ascending: false }).range(inicio, inicio + 19).abortSignal(signal)
   if (error) throw new Error(mensagemErro(error))
   return { itens: data ?? [], total: count ?? 0 }
+}
+
+export async function obterManutencao(id, signal) {
+  const { data, error } = await supabase.from('manutencoes')
+    .select('id, veiculo_id, tipo_manutencao_id, data_manutencao, quilometragem, valor_pago, oficina, observacoes, atualizado_em, tipos_manutencao(id, nome)')
+    .eq('id', id).maybeSingle().abortSignal(signal)
+  if (error) throw new Error(mensagemErro(error))
+  return data
+}
+
+export async function editarManutencao(original, campos) {
+  const validacao = validarManutencao(campos)
+  if (validacao) throw new Error(validacao)
+  if (campos.veiculoId !== original.veiculo_id) throw new Error('O veículo desta manutenção não pode ser alterado.')
+  const valor = campos.valor.trim().replace(',', '.')
+  const { data, error } = await supabase.from('manutencoes').update({
+    tipo_manutencao_id: campos.tipoId, data_manutencao: campos.data,
+    quilometragem: Number(campos.quilometragem), valor_pago: valor === '' ? null : Number(valor),
+    oficina: campos.oficina.trim() || null, observacoes: campos.observacoes.trim() || null,
+  }).eq('id', original.id).eq('atualizado_em', original.atualizado_em).select('id').maybeSingle()
+  if (error) throw new Error(mensagemErro(error))
+  if (!data) throw new Error('A manutenção foi alterada, excluída ou ficou indisponível. Reabra a página antes de tentar novamente.')
+  return data.id
+}
+
+export async function excluirManutencao(original) {
+  const { data, error } = await supabase.from('manutencoes').delete()
+    .eq('id', original.id).eq('atualizado_em', original.atualizado_em).select('id').maybeSingle()
+  if (error) throw new Error(mensagemErro(error))
+  if (!data) throw new Error('A manutenção foi alterada, excluída ou ficou indisponível. Reabra a página antes de tentar novamente.')
+  return data.id
 }

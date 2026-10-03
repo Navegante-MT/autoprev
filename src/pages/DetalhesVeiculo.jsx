@@ -1,5 +1,6 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
 import useVeiculo from '../hooks/useVeiculo.js'
+import ExcluirVeiculo from '../components/ExcluirVeiculo.jsx'
 import EstadoVeiculo from '../components/EstadoVeiculo.jsx'
 import { formatarData } from '../lib/veiculos.js'
 import './Painel.css'
@@ -36,6 +37,7 @@ function DetalhesVeiculo() {
               </ul>
             ) : <p>Nenhuma leitura registrada.</p>}
           </section>
+          <ExcluirVeiculo key={id} veiculo={veiculo} />
         </>
       )}
       <Link to="/painel">Voltar ao painel</Link>
