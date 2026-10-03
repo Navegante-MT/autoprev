@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient.js'
+import ResumoPrevisoes from '../components/ResumoPrevisoes.jsx'
 import { listarVeiculos } from '../lib/veiculos.js'
 import './Painel.css'
 
@@ -87,6 +88,8 @@ function Painel() {
                     <p>{veiculo.marca} {veiculo.modelo} · {veiculo.ano}</p>
                     <p>{leitura ? `${leitura.quilometragem.toLocaleString('pt-BR')} km` : 'Quilometragem não registrada'}</p>
                     <Link className="painel-action" to={`/veiculos/${veiculo.id}`}>Ver veículo</Link>
+                    <Link className="painel-action" to={`/veiculos/${veiculo.id}/previsoes`}>Estimativas e avisos</Link>
+                    <ResumoPrevisoes id={veiculo.id} />
                   </li>
                 )
               })}

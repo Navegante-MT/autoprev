@@ -27,13 +27,14 @@ function DetalhesVeiculo() {
           <Link className="painel-action" to={`/veiculos/${id}/quilometragem`}>Atualizar quilometragem</Link>
           <Link className="painel-action" to={`/veiculos/${id}/manutencoes/nova`}>Registrar manutenção</Link>
           <Link className="painel-action" to={`/historico?veiculo=${id}`}>Ver histórico completo deste veículo</Link>
+          <Link className="painel-action" to={`/veiculos/${id}/previsoes`}>Ver estimativas de manutenção</Link>
           <ManutencoesVeiculo id={id} />
           <section aria-labelledby="leituras-titulo">
             <h2 id="leituras-titulo">Últimas leituras de quilometragem</h2>
             <p>Exibimos até 20 leituras, da data mais recente para a mais antiga.</p>
             {leituras.length ? (
               <ul className="veiculo-leituras">
-                {leituras.map(leitura => <li key={leitura.id}>{formatarData(leitura.data_registro)} — {leitura.quilometragem.toLocaleString('pt-BR')} km</li>)}
+                {leituras.map(leitura => <li key={leitura.id}>{formatarData(leitura.data_registro)} — {leitura.quilometragem.toLocaleString('pt-BR')} km <Link to={`/veiculos/${id}/leituras/${leitura.id}/corrigir`}>Corrigir leitura</Link></li>)}
               </ul>
             ) : <p>Nenhuma leitura registrada.</p>}
           </section>

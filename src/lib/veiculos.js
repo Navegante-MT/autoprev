@@ -110,3 +110,24 @@ export async function excluirVeiculo(id) {
   if (!data) throw new Error('Veículo não encontrado ou indisponível para sua conta. Recarregue o painel.')
   return data.id
 }
+
+export async function obterLeitura(veiculoId, leituraId, signal) {
+  const { data, error } = await supabase.from('registros_quilometragem')
+    .select('id, veiculo_id, quilometragem, data_registro, criado_em')
+    .eq('id', leituraId).eq('veiculo_id', veiculoId).maybeSingle().abortSignal(signal)
+  if (error) throw new Error(mensagemErroVeiculos(error))
+  return data
+}
+
+export async function corrigirLeitura(original, quilometragem) {
+  const validacao = validarQuilometragem(quilometragem, original.data_registro)
+  if (validacao) throw new Error(validacao)
+  const { data, error } = await supabase.from('registros_quilometragem')
+    .update({ quilometragem: Number(quilometragem) })
+    .eq('id', original.id).eq('veiculo_id', original.veiculo_id)
+    .eq('quilometragem', original.quilometragem).eq('data_registro', original.data_registro)
+    .eq('criado_em', original.criado_em).select('id').maybeSingle()
+  if (error) throw new Error(mensagemErroVeiculos(error))
+  if (!data) throw new Error('A leitura foi alterada ou ficou indisponível. Reabra a página antes de corrigir.')
+  return data.id
+}

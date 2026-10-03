@@ -2,9 +2,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Entrada from './pages/Entrada.jsx'
 import Login from './pages/Login.jsx'
 import Cadastro from './pages/Cadastro.jsx'
+import PrevisoesVeiculo from './pages/PrevisoesVeiculo.jsx'
 import Painel from './pages/Painel.jsx'
 import CadastrarVeiculo from './pages/CadastrarVeiculo.jsx'
 import DetalhesVeiculo from './pages/DetalhesVeiculo.jsx'
+import CorrigirQuilometragem from './pages/CorrigirQuilometragem.jsx'
 import AtualizarQuilometragem from './pages/AtualizarQuilometragem.jsx'
 import RegistrarManutencao from './pages/RegistrarManutencao.jsx'
 import EditarManutencao from './pages/EditarManutencao.jsx'
@@ -23,7 +25,9 @@ function App() {
         <Route element={<RotaProtegida />}>
           <Route path="/painel" element={<Painel />} />
           <Route path="/veiculos/novo" element={<CadastrarVeiculo />} />
+          <Route path="/veiculos/:id/previsoes" element={<PrevisoesVeiculo />} />
           <Route path="/veiculos/:id" element={<DetalhesVeiculo />} />
+          <Route path="/veiculos/:id/leituras/:leituraId/corrigir" element={<CorrigirQuilometragem />} />
           <Route path="/veiculos/:id/quilometragem" element={<AtualizarQuilometragem />} />
           <Route path="/veiculos/:id/manutencoes/nova" element={<RegistrarManutencao />} />
           <Route path="/manutencoes/nova" element={<RegistrarManutencao />} />
