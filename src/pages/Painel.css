@@ -32,3 +32,10 @@
   padding: 12px;
   background: var(--code-bg);
 }
+
+.painel-veiculos { display: grid; gap: 20px; text-align: left; }
+.painel-action { justify-self: start; padding: 12px 24px; background: var(--text-h); color: var(--bg); border-radius: 8px; text-decoration: none; }
+.painel-cards { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+.painel-card { border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: grid; gap: 12px; overflow-wrap: anywhere; }
+.painel-card h3 { margin: 0; color: var(--text-h); }
+.painel-success { padding: 12px; border-left: 4px solid var(--accent); background: var(--code-bg); color: var(--text-h); }

@@ -1,0 +1,5 @@
+.historico-filtros { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 16px; text-align: left; }
+.historico-filtros div { display: grid; gap: 8px; }
+.historico-filtros label { color: var(--text-h); }
+.historico-filtros input, .historico-filtros select { width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text-h); font: inherit; }
+.historico-paginacao { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center; }

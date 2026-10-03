@@ -1,0 +1,4 @@
+.veiculo-page { text-align: left; }
+.veiculo-page h1 { margin: 0; font-size: 32px; line-height: 1.2; }
+.veiculo-page a:not(.painel-action) { color: var(--accent); }
+.veiculo-leituras { display: grid; gap: 12px; padding-left: 24px; }
