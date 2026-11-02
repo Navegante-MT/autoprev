@@ -1,0 +1,24 @@
+.oficinas-page { text-align: left; }
+.oficinas-introducao, .oficinas-secao, .oficinas-aviso { display: grid; gap: 16px; }
+.oficinas-introducao h1 { font-size: 32px; line-height: 1.2; margin: 0; }
+.oficinas-secao { padding: 24px; border: 1px solid var(--border); border-radius: 12px; }
+.oficinas-secao h2, .oficinas-aviso h2 { margin: 0; }
+.oficinas-aviso { padding: 20px; background: var(--accent-bg); border-left: 4px solid var(--accent); }
+.oficinas-form { display: grid; gap: 16px; }
+.oficinas-campos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.oficinas-campos > div { display: grid; align-content: start; gap: 8px; }
+.oficinas-form label { color: var(--text-h); font-weight: 600; }
+.oficinas-form input, .oficinas-form select {
+  width: 100%; min-width: 0; box-sizing: border-box; padding: 12px;
+  border: 1px solid var(--border); border-radius: 8px; font: inherit;
+  background: var(--bg); color: var(--text-h);
+}
+.oficinas-ajuda { font-size: 0.9rem; }
+.oficinas-page button { justify-self: start; white-space: normal; }
+.oficinas-page button:disabled { cursor: not-allowed; }
+.oficinas-page > a { color: var(--accent); justify-self: start; }
+@media (max-width: 600px) {
+  .oficinas-campos { grid-template-columns: 1fr; }
+  .oficinas-secao { padding: 16px; }
+  .oficinas-page button { width: 100%; }
+}

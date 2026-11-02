@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Configuração local de publicação
+.vercel
+.env
+.env.*
+!.env.example

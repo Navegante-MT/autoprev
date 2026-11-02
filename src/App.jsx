@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Entrada from './pages/Entrada.jsx'
+import NaoEncontrada from './pages/NaoEncontrada.jsx'
 import Login from './pages/Login.jsx'
 import Cadastro from './pages/Cadastro.jsx'
 import PrevisoesVeiculo from './pages/PrevisoesVeiculo.jsx'
 import Painel from './pages/Painel.jsx'
+import Oficinas from './pages/Oficinas.jsx'
 import CadastrarVeiculo from './pages/CadastrarVeiculo.jsx'
 import DetalhesVeiculo from './pages/DetalhesVeiculo.jsx'
 import CorrigirQuilometragem from './pages/CorrigirQuilometragem.jsx'
@@ -24,6 +26,7 @@ function App() {
         <Route path="/cadastro" element={<Cadastro />} />
         <Route element={<RotaProtegida />}>
           <Route path="/painel" element={<Painel />} />
+          <Route path="/oficinas" element={<Oficinas />} />
           <Route path="/veiculos/novo" element={<CadastrarVeiculo />} />
           <Route path="/veiculos/:id/previsoes" element={<PrevisoesVeiculo />} />
           <Route path="/veiculos/:id" element={<DetalhesVeiculo />} />
@@ -36,6 +39,7 @@ function App() {
         </Route>
         <Route path="/recuperar-senha" element={<RecuperarSenha />} />
         <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+        <Route path="*" element={<NaoEncontrada />} />
       </Routes>
     </BrowserRouter>
   )

@@ -62,6 +62,7 @@ function Painel() {
       </header>
       <p>Bem-vindo ao AutoPrev.</p>
       <Link className="painel-action" to="/historico">Histórico de manutenções</Link>
+      <Link className="painel-action" to="/oficinas">Oficinas</Link>
       {location.state?.mensagem && <p className="painel-success" role="status">{location.state.mensagem}</p>}
       <section className="painel-veiculos" aria-labelledby="meus-veiculos">
         <h2 id="meus-veiculos">Meus veículos</h2>
