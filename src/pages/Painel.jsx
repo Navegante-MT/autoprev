@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient.js'
 import ResumoPrevisoes from '../components/ResumoPrevisoes.jsx'
@@ -7,6 +7,21 @@ import './Painel.css'
 
 function Painel() {
   const [saindo, setSaindo] = useState(false)
+  const [confirmandoSaida, setConfirmandoSaida] = useState(false)
+  const envioSaida = useRef(false)
+  const botaoSair = useRef(null)
+  const botaoCancelar = useRef(null)
+
+  useEffect(() => {
+    if (confirmandoSaida) botaoCancelar.current?.focus()
+  }, [confirmandoSaida])
+
+  function cancelarSaida() {
+    if (envioSaida.current) return
+    setConfirmandoSaida(false)
+    setErro('')
+    botaoSair.current?.focus()
+  }
   const [erro, setErro] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
@@ -33,8 +48,8 @@ function Painel() {
   }
 
   async function sair() {
-    if (saindo) return
-    if (!window.confirm('Deseja sair do AutoPrev?')) return
+    if (envioSaida.current) return
+    envioSaida.current = true
     setErro('')
     setSaindo(true)
 
@@ -48,6 +63,7 @@ function Painel() {
     } catch {
       setErro('Não foi possível conectar. Confira sua conexão e tente novamente.')
     } finally {
+      envioSaida.current = false
       setSaindo(false)
     }
   }
@@ -56,10 +72,23 @@ function Painel() {
     <main className="painel-page">
       <header className="painel-header">
         <h1>Painel principal</h1>
-        <button type="button" onClick={sair} disabled={saindo}>
+        <button type="button" ref={botaoSair} onClick={() => { setErro(''); setConfirmandoSaida(true) }} disabled={saindo} aria-expanded={confirmandoSaida}>
           {saindo ? 'Saindo…' : 'Sair'}
         </button>
       </header>
+      {confirmandoSaida && (
+        <section className="painel-confirmar-saida" aria-labelledby="confirmar-saida-titulo" aria-busy={saindo}>
+          <h2 id="confirmar-saida-titulo">Deseja sair do AutoPrev?</h2>
+          <p>Seus registros continuarão salvos. Para acessar o painel novamente, será necessário entrar na conta.</p>
+
+          {erro && <p className="painel-error" role="alert">{erro}</p>}
+          <div className="painel-saida-acoes">
+            <button type="button" ref={botaoCancelar} onClick={cancelarSaida} disabled={saindo}>Cancelar</button>
+            <button type="button" onClick={sair} disabled={saindo}>{saindo ? 'Saindo…' : 'Confirmar saída'}</button>
+          </div>
+          {saindo && <p role="status">Encerrando sua sessão…</p>}
+        </section>
+      )}
       <p>Bem-vindo ao AutoPrev.</p>
       <Link className="painel-action" to="/historico">Histórico de manutenções</Link>
       <Link className="painel-action" to="/oficinas">Oficinas</Link>
@@ -98,7 +127,7 @@ function Painel() {
           </>
         )}
       </section>
-      {erro && <p className="painel-error" role="alert">{erro}</p>}
+
     </main>
   )
 }
